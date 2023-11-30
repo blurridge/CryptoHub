@@ -1,6 +1,6 @@
 "use client";
 
-import { db } from "@/firebase/config";
+import { db, auth } from "@/firebase/config";
 import {
   GoogleAuthProvider,
   User,
@@ -9,8 +9,13 @@ import {
   signOut,
 } from "firebase/auth";
 import { collection, onSnapshot, query } from "firebase/firestore";
-import { ReactNode, createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase/config";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Admin, AuthContextProps } from "@/types/types";
 
 const AuthContext = createContext<AuthContextProps>({
@@ -50,6 +55,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       setLoading(true);
       const data: Admin[] = snap.docs.map((doc) => ({
         email: doc.data().email,
+        coins: doc.data().coins || undefined,
       }));
       setAdminList(data);
       setLoading(false);
