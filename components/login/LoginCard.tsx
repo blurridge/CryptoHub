@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useAuth } from "@/context/AuthContext";
+import cryptohubLogo from "@/public/cryptohub_logo.png"
 import Image from "next/image";
 
 export const LoginCard = () => {
@@ -25,7 +26,13 @@ export const LoginCard = () => {
     return (
       <>
         <Card className="w-96 flex flex-col items-center justify-center ">
-          <CardHeader className="flex flex-col items-center justify-center gap-3">
+          <CardHeader className="flex flex-col items-center justify-center gap-4">
+            <Image
+              src={cryptohubLogo}
+              width={100}
+              alt="CryptoHub Logo"
+              priority
+            />
             <CardTitle className="text-center">CryptoHub</CardTitle>
           </CardHeader>
           <CardContent className="text-center">
