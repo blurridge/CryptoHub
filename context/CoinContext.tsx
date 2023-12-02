@@ -94,7 +94,7 @@ export const CoinContextProvider = ({ children }: { children: ReactNode }) => {
               }
             );
 
-            setTimeout(() => {}, 500);
+            setTimeout(() => {}, 1000);
 
             const historicalData: CoinValuePerDay[] = response.data.prices.map(
               (priceData: [number, number]) => {
@@ -131,13 +131,13 @@ export const CoinContextProvider = ({ children }: { children: ReactNode }) => {
       });
     };
 
+    const foundOldCache = coinCache.some(
+      (coin) =>
+        coin.last_updated.toDate().toDateString() !== new Date().toDateString()
+    );
     if (coinCache.length !== coinList.length) {
       updateCoinCache();
-    } else if (
-      coinCache[0] &&
-      coinCache[0]?.last_updated.toDate().toDateString() !==
-        new Date().toDateString()
-    ) {
+    } else if (coinCache[0] && foundOldCache) {
       updateCoinCache();
     }
   }, [coinCache]);
