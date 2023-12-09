@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ReactNode, useEffect } from "react";
 import { Sidebar } from "@/components/home/Sidebar";
 import { SidebarContent } from "@/components/home/SidebarContent";
-import { Header } from "@/components/home/Header";
+import { MobileHeader } from "@/components/home/Header";
 import { GreenLoader } from "@/components/loaders/Loader";
 
 const Layout = ({ children }: { children: ReactNode }) => {
@@ -28,7 +28,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <div className="flex flex-col h-fit">
           <Sidebar
             sidebarContent={SidebarContent}
-            mobileDashboardHeader={Header}
+            mobileDashboardHeader={MobileHeader}
           >
             {children}
           </Sidebar>

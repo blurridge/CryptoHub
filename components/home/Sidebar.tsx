@@ -13,20 +13,22 @@ export const WithMobileSidebar = ({
 }) => {
   return (
     <>
-      <Sheet>
-        <div className="mt-5 flex md:hidden">
-          <div className="flex flex-1">
-            {MobileDashboardHeader && <MobileDashboardHeader />}
+      <div className="flex flex-col w-screen">
+        <Sheet>
+          <div className="my-5 flex md:hidden">
+            <div className="flex flex-1 justify-between mr-5">
+              {MobileDashboardHeader && <MobileDashboardHeader />}
+              <SheetTrigger>
+                <MenuIcon size={24} />
+              </SheetTrigger>
+            </div>
           </div>
-          <SheetTrigger>
-            <MenuIcon size={24} />
-          </SheetTrigger>
-        </div>
-        <SheetContent side="left">
-          <SidebarContent />
-        </SheetContent>
-      </Sheet>
-      {children}
+          <SheetContent className="w-fit" side="left">
+            <SidebarContent />
+          </SheetContent>
+        </Sheet>
+        {children}
+      </div>
     </>
   );
 };
@@ -40,7 +42,7 @@ const WithDesktopSidebar = ({
 }) => {
   return (
     <div className="flex">
-      <aside className="fixed top-14 z-30 -ml-2 hidden h-screen w-fit shrink-0 border-r md:sticky md:block">
+      <aside className="fixed top-0 z-30 -ml-2 hidden h-screen w-fit shrink-0 border-r md:sticky md:block">
         <div className="h-full py-6 pl-8 pr-6 lg:py-8">
           <SidebarContent />
         </div>

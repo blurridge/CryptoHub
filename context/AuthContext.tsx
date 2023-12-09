@@ -37,7 +37,9 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logOut = () => {
+    setLoading(true);
     signOut(auth);
+    setLoading(false);
   };
 
   useEffect(() => {

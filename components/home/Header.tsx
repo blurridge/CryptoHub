@@ -9,3 +9,12 @@ export const Header = () => {
     </div>
   );
 };
+
+export const MobileHeader = () => {
+  return (
+    <div className="flex px-4">
+      <Image src={cryptohubLogo} width={24} alt="CryptoHub Logo" priority />
+      <span className="text-md font-extrabold">CryptoHub</span>
+    </div>
+  );
+};

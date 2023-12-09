@@ -15,14 +15,14 @@ ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
-  Legend,
   Tooltip
 );
 
 export const LineGraph = ({ data, options }: GraphProps) => {
   return (
     <>
-      <div className="w-5/12 md:w-10/12">
+      <div className="w-[75vw] my-5">
+        <h1 className="text-center font-extrabold text-xl uppercase">{data.datasets[0].label}</h1>
         <Line data={data} options={options}></Line>
       </div>
     </>
