@@ -1,17 +1,8 @@
-import { Sidebar } from "@/components/home/Sidebar";
-import { SidebarContent } from "@/components/home/SidebarContent";
-import { Header } from "@/components/home/Header";
-
+// TODO: Dashboard will contain portfolio growth, trending coins, recent news in crypto, greeting to user.
 const Page = () => {
   return (
     <>
-      <div className="h-screen w-screen flex flex-col items-center justify-center">
-        <Sidebar sidebarContent={SidebarContent} mobileDashboardHeader={Header}>
-          <div className="p-10">
-            <p>dashboard</p>
-          </div>
-        </Sidebar>
-      </div>
+      <p>Home</p>
     </>
   );
 };

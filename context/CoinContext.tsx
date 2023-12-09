@@ -78,41 +78,52 @@ export const CoinContextProvider = ({ children }: { children: ReactNode }) => {
 
       const updatedCache = await Promise.all(
         coinList.map(async (coin) => {
-          try {
-            const response = await axios.get(
-              `https://api.coingecko.com/api/v3/coins/${
-                coin.coin_id
-              }/market_chart/range?vs_currency=php&from=${Math.floor(
-                fromTimestamp.getTime() / 1000
-              )}&to=${Math.floor(toTimestamp.getTime() / 1000)}`,
-              {
-                headers: {
-                  "x-cg-demo-api-key":
-                    process.env.NEXT_PUBLIC_COINGECKO_API_KEY,
-                  "Content-Type": "application/json",
-                },
-              }
-            );
+          const currentCoinUpdated = coinCache.some((currentCoin) => {
+            currentCoin.coin_id === coin.coin_id &&
+              currentCoin.last_updated.toDate().toDateString() ===
+                new Date().toDateString();
+          });
+          if (currentCoinUpdated) {
+            const updatedCoin = coinCache.find((upCoin) => {
+              coin.coin_id === upCoin.coin_id;
+            });
+            return updatedCoin;
+          } else {
+            try {
+              const response = await axios.get(
+                `https://api.coingecko.com/api/v3/coins/${
+                  coin.coin_id
+                }/market_chart/range?vs_currency=php&from=${Math.floor(
+                  fromTimestamp.getTime() / 1000
+                )}&to=${Math.floor(toTimestamp.getTime() / 1000)}`,
+                {
+                  headers: {
+                    "x-cg-demo-api-key":
+                      process.env.NEXT_PUBLIC_COINGECKO_API_KEY,
+                    "Content-Type": "application/json",
+                  },
+                }
+              );
 
-            setTimeout(() => {}, 1000);
+              setTimeout(() => {}, 3000);
 
-            const historicalData: CoinValuePerDay[] = response.data.prices.map(
-              (priceData: [number, number]) => {
-                const [date, value_in_php] = priceData;
-                return {
-                  date: Timestamp.fromDate(new Date(date)),
-                  value_in_php,
-                };
-              }
-            );
-            return {
-              coin_id: coin.coin_id,
-              coin_historical_data: historicalData,
-              last_updated: Timestamp.fromDate(toTimestamp),
-            };
-          } catch (error) {
-            console.error(`Error fetching data for ${coin.coin_id}:`, error);
-            return null; // Return null or handle the error accordingly
+              const historicalData: CoinValuePerDay[] =
+                response.data.prices.map((priceData: [number, number]) => {
+                  const [date, value_in_php] = priceData;
+                  return {
+                    date: Timestamp.fromDate(new Date(date)),
+                    value_in_php,
+                  };
+                });
+              return {
+                coin_id: coin.coin_id,
+                coin_historical_data: historicalData,
+                last_updated: Timestamp.fromDate(toTimestamp),
+              };
+            } catch (error) {
+              console.error(`Error fetching data for ${coin.coin_id}:`, error);
+              return null; // Return null or handle the error accordingly
+            }
           }
         })
       );

@@ -39,8 +39,8 @@ const WithDesktopSidebar = ({
   sidebarContent: () => JSX.Element;
 }) => {
   return (
-    <div className="container h-screen flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
-      <aside className="fixed top-14 z-30 -ml-2 hidden h-screen w-full shrink-0 border-r md:sticky md:block">
+    <div className="flex">
+      <aside className="fixed top-14 z-30 -ml-2 hidden h-screen w-fit shrink-0 border-r md:sticky md:block">
         <div className="h-full py-6 pl-8 pr-6 lg:py-8">
           <SidebarContent />
         </div>

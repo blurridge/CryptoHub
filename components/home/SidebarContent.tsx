@@ -1,26 +1,24 @@
 "use client";
 
 import { Header } from "@/components/home/Header";
-import { useAuth } from "@/context/AuthContext";
-import { Button } from "@/components/ui/button";
+import { UserOptions } from "@/components/home/UserOptions";
 
 export const SidebarContent = () => {
-  const { logOut } = useAuth();
   return (
-    <div>
-      <Header />
-      <div className="mt-6">
+    <div className="flex flex-col justify-between h-full">
+      <div>
+        <Header />
         {["Home", "Portfolio"].map((item, index) => (
           <a
             key={index}
             href={item.toLowerCase()}
-            className="block rounded px-4 py-2.5 transition duration-200 hover:bg-lightgreen"
+            className="block rounded px-4 py-2.5 transition duration-200 text-black hover:bg-lightgreen hover:text-white"
           >
             {item}
           </a>
         ))}
       </div>
-      <Button onClick={logOut}>Logout</Button>
+      <UserOptions />
     </div>
   );
 };
