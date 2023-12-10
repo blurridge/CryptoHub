@@ -24,6 +24,7 @@ import {
   CoinValuePerDay,
 } from "@/types/types";
 import axios from "axios";
+import { convertDate } from "@/utils/convertDate";
 
 const CoinContext = createContext<CoinContextProps>({
   coinList: [],
@@ -35,6 +36,14 @@ export const CoinContextProvider = ({ children }: { children: ReactNode }) => {
   const [coinList, setCoinList] = useState<Coins[]>([]);
   const [coinCache, setCoinCache] = useState<CoinCache[]>([]);
   const [coinsLoading, setCoinsLoading] = useState<boolean>(true);
+  const today = new Date();
+  const formattedTodayDate = today
+    .toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+    .replace(/\//g, "-");
 
   useEffect(() => {
     const q = query(collection(db, "coin_list"));
@@ -53,19 +62,17 @@ export const CoinContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    const getCoinCache = async () => {
-      const querySnapshot = await getDocs(collection(db, "coin_cache"));
-      const data: CoinCache[] = querySnapshot.docs.map((doc) => ({
+    const q = query(collection(db, "coin_cache"));
+    const unsubscribe = onSnapshot(q, (snap) => {
+      const data: CoinCache[] = snap.docs.map((doc) => ({
         coin_id: doc.data().coin_id,
         coin_historical_data: doc.data().coin_historical_data,
         last_updated: doc.data().last_updated,
       }));
       setCoinCache(data);
-    };
-    if (coinList.length !== 0) {
-      getCoinCache();
-    }
-  }, [coinList]);
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const updateCoinCache = async () => {
@@ -81,8 +88,8 @@ export const CoinContextProvider = ({ children }: { children: ReactNode }) => {
         coinList.map(async (coin) => {
           const currentCoinUpdated = coinCache.some((currentCoin) => {
             currentCoin.coin_id === coin.coin_id &&
-              currentCoin.last_updated.toDate().toDateString() ===
-                new Date().toDateString();
+              convertDate(currentCoin.last_updated.seconds) !==
+                formattedTodayDate;
           });
           if (currentCoinUpdated) {
             const updatedCoin = coinCache.find((upCoin) => {
@@ -131,7 +138,6 @@ export const CoinContextProvider = ({ children }: { children: ReactNode }) => {
       const filteredCache = updatedCache.filter(
         (entry) => entry !== null
       ) as CoinCache[];
-      setCoinCache(filteredCache);
       filteredCache.forEach(async (coin) => {
         if (coin) {
           await setDoc(doc(collection(db, "coin_cache"), coin.coin_id), {
@@ -142,16 +148,10 @@ export const CoinContextProvider = ({ children }: { children: ReactNode }) => {
         }
       });
     };
-
     const foundOldCache = coinCache.some(
-      (coin) =>
-        coin.last_updated.toDate().toDateString() !== new Date().toDateString()
+      (coin) => convertDate(coin.last_updated.seconds) !== formattedTodayDate
     );
-    console.log(coinCache.length);
-    console.log(coinList.length);
-    if (coinCache.length !== coinList.length) {
-      updateCoinCache();
-    } else if (foundOldCache) {
+    if (coinCache.length !== coinList.length || foundOldCache) {
       updateCoinCache();
     }
   }, [coinCache]);
