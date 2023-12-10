@@ -119,7 +119,7 @@ export const InvestmentForm = ({ handleDialogClose }: InvestmentFormProps) => {
                 </FormControl>
                 <SelectContent>
                   {coinList.map((coin) => (
-                    <SelectItem value={coin.coin_id}>
+                    <SelectItem key={"Sel" + coin.coin_id} value={coin.coin_id}>
                       <div className="flex gap-5">
                         <Image
                           src={coin.image_link}

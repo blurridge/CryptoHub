@@ -7,7 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 import { convertDate } from "@/utils/convertDate";
 import { useExtrapolation } from "@/context/ExtrapolationContext";
 import { useState, useEffect } from "react";
-import { CoinCache } from "@/types/types";
+import { CoinCache, UserInvestment } from "@/types/types";
 import { lagrangeExtrapolation } from "@/utils/lagrangeExtrapolation";
 import { checkIfDateIsGreater } from "@/utils/checkIfDateIsGreater";
 
@@ -24,7 +24,7 @@ export const GraphList = () => {
   useEffect(() => {
     if (currentDegree !== "none") {
       const updatePromises = coinCache.map((coinData) => {
-        return new Promise((resolve) => {
+        return new Promise<void>((resolve) => {
           setExtrapolatedData((prevExtrapolatedData) => {
             const [newDate, newPrice] = lagrangeExtrapolation({
               currentDegree,
@@ -67,6 +67,7 @@ export const GraphList = () => {
     (currentUser) => currentUser.email === user?.email
   );
   const currentUserInvestments = getCurrentUser?.coins;
+  console.log(currentUserInvestments);
 
   return extrapolatedData.map((coin) => {
     let dateInvested: string = "";
@@ -87,8 +88,15 @@ export const GraphList = () => {
       );
       if (userInvestedInCurrentCoin) {
         const currentInvestmentData =
-          currentUserInvestments[userInvestedInCurrentCoin];
-        dateInvested = convertDate(currentInvestmentData.date_invested.seconds);
+          currentUserInvestments[
+            userInvestedInCurrentCoin as keyof typeof currentUserInvestments
+          ];
+        if (typeof currentInvestmentData !== "number") {
+          // Only proceed if currentInvestmentData is not a number
+          const investmentData = currentInvestmentData as UserInvestment;
+          dateInvested = convertDate(investmentData.date_invested.seconds);
+          // Use investmentData safely as UserInvestment type
+        }
       }
     }
 

@@ -63,3 +63,7 @@ export type GraphProps = {
 export type InvestmentFormProps = {
   handleDialogClose?: () => void;
 };
+
+export type UserInvestmentObject = {
+  [key: string]: UserInvestment;
+};
