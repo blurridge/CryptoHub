@@ -115,8 +115,9 @@ export const GraphList = () => {
                 return "yellow";
               }
               return label === dateInvested ? "red" : "aqua"; // Colors the point red when label is equal to user's investment date.
-            } else {
-              return "aqua"; // If no investment is done, all is colored aqua.
+            } else if (ctx.chart.data.labels) {
+              const label = ctx.chart.data.labels[ctx.dataIndex];
+              return checkIfDateIsGreater(label) ? "yellow" : "aqua"; // If no investment is done, all is colored aqua.
             }
           },
         },

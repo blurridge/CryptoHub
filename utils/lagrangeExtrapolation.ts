@@ -50,11 +50,6 @@ export const lagrangeExtrapolation = ({
     numberOfDataPoints,
     nextDateTimestamp
   );
-  console.log("CURRENT DEGREE: ", currentDegree);
-  console.log("CURRENT DAY: ", daysInTheFuture);
-  console.log(timestamps);
-  console.log(values);
-  console.log(nextDateTimestamp);
   const nextDateTimestampAsFBTimestamp =
     Timestamp.fromMillis(nextDateTimestamp);
   return [nextDateTimestampAsFBTimestamp, extrapolatedValue];
