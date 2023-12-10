@@ -11,19 +11,22 @@ Numerical methods form the backbone of scientific computing, offering solutions 
 
 One of the key techniques utilized in this project is Lagrange Extrapolation. It's a polynomial interpolation method used to estimate unknown values between known data points. In CryptoHub, Lagrange Extrapolation plays a pivotal role in predicting future cryptocurrency values by extrapolating trends from historical data.
 
-The formula for Lagrange extrapolation is:
-
-![Lagrange Formula](https://latex.codecogs.com/svg.image?%5B%20f(x)%20%5Capprox%20%5Csum_%7Bi=0%7D%5E%7Bn%7D%20f(x_i)%20%5Ccdot%20%5Cell_i(x)%20%5C%5D)
-
-Where:
-- \( f(x) \) is the estimated function.
-- \( \sum \) represents summation from \( i = 0 \) to \( n \).
-- \( f(x_i) \) denotes the known function values at \( x_i \).
-- \( \ell_i(x) \) is the Lagrange basis polynomial.
-
 CryptoHub is built using Next.js, a React framework for building web applications, and Firebase, a platform for developing web apps with backend services. The application serves as a crypto portfolio tracker, enabling users to manage and track their cryptocurrency investments.
 
 The heart of CryptoHub lies in its ability to predict future cryptocurrency values using Lagrange Extrapolation. The implementation covers extrapolation functions ranging from linear to sextic degrees, allowing users to explore and predict potential trends in their chosen cryptocurrencies.
+
+## Formula
+The formula for Lagrange Extrapolation is:
+
+$
+f(x) \approx \sum_{i=0}^{n} f(x_i) \cdot \ell_i(x)
+$
+
+Where:
+- $f(x)$ is the estimated function.
+- $\sum$ represents summation from $i = 0$ to $n$.
+- $f(x_i)$ denotes the known function values at $x_i$.
+- $\ell_i(x)$ is the Lagrange basis polynomial.
 
 ## Tech Stack
 
