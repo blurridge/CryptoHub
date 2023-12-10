@@ -21,7 +21,7 @@ export const AddInvestment = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>
+        <Button className="w-fit">
           <Plus className="mr-2 h-4 w-4" /> Add Investment
         </Button>
       </DialogTrigger>

@@ -1,6 +1,7 @@
 import { User } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
 import type { ChartData, ChartOptions } from "chart.js";
+import { Dispatch, SetStateAction } from "react";
 
 export type UserInvestment = {
   coin_id: string;
@@ -38,12 +39,18 @@ export type AuthContextProps = {
   user: User | null;
   checkIfUserIsAdmin: (user: User) => boolean;
   loading: boolean;
+  adminList: Admin[];
 };
 
 export type CoinContextProps = {
   coinList: Coins[];
   coinCache: CoinCache[];
   coinsLoading: boolean;
+};
+
+export type ExtrapolationContextProps = {
+  currentDegree: string;
+  setCurrentDegree: Dispatch<SetStateAction<string>>;
 };
 
 export type GraphProps = {

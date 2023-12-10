@@ -7,6 +7,7 @@ import { Sidebar } from "@/components/home/Sidebar";
 import { SidebarContent } from "@/components/home/SidebarContent";
 import { MobileHeader } from "@/components/home/Header";
 import { GreenLoader } from "@/components/loaders/Loader";
+import { ExtrapolationContextProvider } from "@/context/ExtrapolationContext";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const { user, loading } = useAuth();
@@ -25,14 +26,16 @@ const Layout = ({ children }: { children: ReactNode }) => {
           <GreenLoader />
         </div>
       ) : (
-        <div className="flex flex-col h-fit">
-          <Sidebar
-            sidebarContent={SidebarContent}
-            mobileDashboardHeader={MobileHeader}
-          >
-            {children}
-          </Sidebar>
-        </div>
+        <ExtrapolationContextProvider>
+          <div className="flex flex-col h-fit">
+            <Sidebar
+              sidebarContent={SidebarContent}
+              mobileDashboardHeader={MobileHeader}
+            >
+              {children}
+            </Sidebar>
+          </div>
+        </ExtrapolationContextProvider>
       )}
     </>
   );

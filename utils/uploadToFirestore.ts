@@ -2,14 +2,7 @@
 
 import { FormType } from "@/types/schema";
 import { db } from "@/firebase/config";
-import {
-  Timestamp,
-  addDoc,
-  collection,
-  doc,
-  updateDoc,
-  getDoc,
-} from "firebase/firestore";
+import { Timestamp, doc, updateDoc } from "firebase/firestore";
 import { UserInvestment, CoinCache } from "@/types/types";
 
 type uploadToFirestoreProps = {

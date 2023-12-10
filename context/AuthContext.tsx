@@ -24,6 +24,7 @@ const AuthContext = createContext<AuthContextProps>({
   user: null,
   checkIfUserIsAdmin: (user: User) => false,
   loading: true,
+  adminList: [],
 });
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
@@ -57,7 +58,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       setLoading(true);
       const data: Admin[] = snap.docs.map((doc) => ({
         email: doc.data().email,
-        coins: doc.data().coins || undefined,
+        coins: doc.data().investments || undefined,
       }));
       setAdminList(data);
       setLoading(false);
@@ -74,7 +75,14 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ googleLogin, logOut, user, checkIfUserIsAdmin, loading }}
+      value={{
+        googleLogin,
+        logOut,
+        user,
+        checkIfUserIsAdmin,
+        loading,
+        adminList,
+      }}
     >
       {children}
     </AuthContext.Provider>
