@@ -51,6 +51,8 @@ export type CoinContextProps = {
 export type ExtrapolationContextProps = {
   currentDegree: string;
   setCurrentDegree: Dispatch<SetStateAction<string>>;
+  currentDay: number;
+  setCurrentDay: Dispatch<SetStateAction<number>>;
 };
 
 export type GraphProps = {

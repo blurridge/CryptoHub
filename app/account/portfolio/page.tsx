@@ -1,4 +1,5 @@
 import { AddInvestment } from "@/components/portfolio/AddInvestment";
+import { DayDropdown } from "@/components/portfolio/DayDropdown";
 import { ExtrapolationDropdown } from "@/components/portfolio/ExtrapolationDropdown";
 import { GraphList } from "@/components/portfolio/GraphList";
 
@@ -9,6 +10,7 @@ const Page = () => {
         <div className="flex gap-5">
           <AddInvestment />
           <ExtrapolationDropdown />
+          <DayDropdown />
         </div>
         <GraphList />
       </div>
