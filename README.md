@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CryptoHub - A Cryptocurrency Portfolio Tracker Web App 📈
 
-## Getting Started
+![Accred Logo](https://i.imgur.com/W7DZ2u7.png)
+![Commit Shield](https://img.shields.io/github/last-commit/blurridge/CryptoHub?style=for-the-badge)
+![License](https://img.shields.io/github/license/blurridge/CryptoHub?style=for-the-badge)
+## Context
 
-First, run the development server:
+CryptoHub is a project developed as the final assignment for the CPE 3108 - Numerical Methods course. This project dives into the realm of numerical methods, a field that encompasses various algorithms and techniques used to solve problems through numerical approximation. In this context, the focus was on leveraging numerical methods for predicting cryptocurrency values.
+
+Numerical methods form the backbone of scientific computing, offering solutions to problems that might not have straightforward analytical solutions. These methods involve approximating solutions using mathematical models, algorithms, and computational tools, making them crucial in fields ranging from engineering to finance.
+
+One of the key techniques utilized in this project is Lagrange Extrapolation. It's a polynomial interpolation method used to estimate unknown values between known data points. In CryptoHub, Lagrange Extrapolation plays a pivotal role in predicting future cryptocurrency values by extrapolating trends from historical data.
+
+The formula for Lagrange extrapolation is:
+
+![Lagrange Formula](https://latex.codecogs.com/svg.image?%5B%20f(x)%20%5Capprox%20%5Csum_%7Bi=0%7D%5E%7Bn%7D%20f(x_i)%20%5Ccdot%20%5Cell_i(x)%20%5C%5D)
+
+Where:
+- \( f(x) \) is the estimated function.
+- \( \sum \) represents summation from \( i = 0 \) to \( n \).
+- \( f(x_i) \) denotes the known function values at \( x_i \).
+- \( \ell_i(x) \) is the Lagrange basis polynomial.
+
+CryptoHub is built using Next.js, a React framework for building web applications, and Firebase, a platform for developing web apps with backend services. The application serves as a crypto portfolio tracker, enabling users to manage and track their cryptocurrency investments.
+
+The heart of CryptoHub lies in its ability to predict future cryptocurrency values using Lagrange Extrapolation. The implementation covers extrapolation functions ranging from linear to sextic degrees, allowing users to explore and predict potential trends in their chosen cryptocurrencies.
+
+## Tech Stack
+
+**Client:**
+
+<p> <a href="https://nextjs.org/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/next-js.svg" alt="next.js" width="40" height="40"/> </a> <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" width="40" height="40"/> </a> </p>
+
+**Server:**
+
+<p><a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a> </p>
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/blurridge/CryptoHub
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project's directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd CryptoHub/
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Create a `.env` file containing your Firebase variables. Use `.env.example` as a template.
+```
+NEXT_PUBLIC_FIREBASE_API_KEY              = <<your firebase api key here>>
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN          = <<your firebase auth domain here>>
+NEXT_PUBLIC_FIREBASE_PROJECT_ID           = <<your firebase project id here>>
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET       = <<your firebase storage bucket here>>
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID  = <<your firebase messaging sender id here>>
+NEXT_PUBLIC_FIREBASE_APP_ID               = <<your firebase app id here>>
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID       = <<your firebase measurement id here>>
+NEXT_PUBLIC_COINGECKO_API_KEY             = <<your coingecko api key here>>
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Start the server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+  npm run dev
+```
 
-## Deploy on Vercel
+## Stay in touch
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If you have any questions, suggestions, need further assistance, or would like to avail of Accred for your organization, feel free to reach out to me. I'm always happy to help!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Email: [zachriane01@gmail.com](mailto:zachriane01@gmail.com)
+- GitHub: [@blurridge](https://github.com/blurridge)
+- Twitter: [@zachahalol](https://twitter.com/zachahalol)
+- Instagram: [@zachahalol](https://www.instagram.com/zachahalol)
+- LinkedIn: [Zach Riane Machacon](https://www.linkedin.com/in/zachriane)
+
+## Contributors
+<a href="https://github.com/blurridge/CryptoHub/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=blurridge/CryptoHub" />
+</a>
