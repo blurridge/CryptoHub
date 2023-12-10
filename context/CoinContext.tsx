@@ -44,6 +44,7 @@ export const CoinContextProvider = ({ children }: { children: ReactNode }) => {
         coin_id: doc.data().coin_id,
         symbol: doc.data().symbol,
         name: doc.data().name,
+        image_link: doc.data().image_link,
       }));
       setCoinList(data);
       setCoinsLoading(false);
@@ -146,9 +147,11 @@ export const CoinContextProvider = ({ children }: { children: ReactNode }) => {
       (coin) =>
         coin.last_updated.toDate().toDateString() !== new Date().toDateString()
     );
+    console.log(coinCache.length);
+    console.log(coinList.length);
     if (coinCache.length !== coinList.length) {
       updateCoinCache();
-    } else if (coinCache[0] && foundOldCache) {
+    } else if (foundOldCache) {
       updateCoinCache();
     }
   }, [coinCache]);

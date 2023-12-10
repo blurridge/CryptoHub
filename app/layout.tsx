@@ -24,7 +24,7 @@ export default function RootLayout({
           <CoinContextProvider>
             <ThemeContextProvider
               attribute="class"
-              defaultTheme="system"
+              defaultTheme="light"
               enableSystem
               disableTransitionOnChange
             >

@@ -4,7 +4,7 @@ import type { ChartData, ChartOptions } from "chart.js";
 
 export type UserInvestment = {
   coin_id: string;
-  date_invested: Date;
+  date_invested: Timestamp;
   amount_invested: number;
   value_at_investment: number;
 };
@@ -13,6 +13,7 @@ export type Coins = {
   coin_id: string;
   symbol: string;
   name: string;
+  image_link: string;
 };
 
 export type CoinCache = {
@@ -48,4 +49,8 @@ export type CoinContextProps = {
 export type GraphProps = {
   options: ChartOptions<"line">;
   data: ChartData<"line">;
+};
+
+export type InvestmentFormProps = {
+  handleDialogClose?: () => void;
 };
