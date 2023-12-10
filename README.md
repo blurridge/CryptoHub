@@ -18,9 +18,7 @@ The heart of CryptoHub lies in its ability to predict future cryptocurrency valu
 ## Formula
 The formula for Lagrange Extrapolation is:
 
-$
-f(x) \approx \sum_{i=0}^{n} f(x_i) \cdot \ell_i(x)
-$
+$f(x) \approx \sum_{i=0}^{n} f(x_i) \cdot \ell_i(x)$
 
 Where:
 - $f(x)$ is the estimated function.
