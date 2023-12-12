@@ -145,7 +145,7 @@ export const InvestmentForm = ({ handleDialogClose }: InvestmentFormProps) => {
           name="amount_invested"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Amount Invested</FormLabel>
+              <FormLabel>Amount Invested (in PHP)</FormLabel>
               <FormControl>
                 <Input type="number" {...field} />
               </FormControl>

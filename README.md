@@ -66,6 +66,7 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID  = <<your firebase messaging sender id 
 NEXT_PUBLIC_FIREBASE_APP_ID               = <<your firebase app id here>>
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID       = <<your firebase measurement id here>>
 NEXT_PUBLIC_COINGECKO_API_KEY             = <<your coingecko api key here>>
+NEXT_PUBLIC_GNEWS_API_KEY                 = <<your gnews api key here>>
 ```
 
 Start the server

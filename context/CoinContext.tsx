@@ -4,7 +4,6 @@ import { db } from "@/firebase/config";
 import {
   Timestamp,
   collection,
-  getDocs,
   onSnapshot,
   query,
   setDoc,

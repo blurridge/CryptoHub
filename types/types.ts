@@ -67,3 +67,27 @@ export type InvestmentFormProps = {
 export type UserInvestmentObject = {
   [key: string]: UserInvestment;
 };
+
+export type CurrentInvestment = {
+  name: string;
+  image_link: string;
+  symbol: string;
+  coin_id: string;
+  amount_invested: number;
+  value_at_investment: number;
+  value_now: number;
+  coin_value_now: number;
+};
+
+export type NewsContextProps = {
+  news: Article[];
+  loading: boolean;
+};
+
+export type Article = {
+  title: string;
+  url: string;
+  description: string;
+  published_at: Date;
+  source: string;
+};

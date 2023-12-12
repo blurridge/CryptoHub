@@ -1,8 +1,11 @@
-// TODO: Dashboard will contain portfolio growth, trending coins, recent news in crypto, greeting to user.
+import { PortfolioGrowth } from "@/components/home/PortfolioGrowth";
+
 const Page = () => {
   return (
     <>
-      <p>Home</p>
+      <div>
+        <PortfolioGrowth />
+      </div>
     </>
   );
 };

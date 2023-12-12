@@ -67,7 +67,6 @@ export const GraphList = () => {
     (currentUser) => currentUser.email === user?.email
   );
   const currentUserInvestments = getCurrentUser?.coins;
-  console.log(currentUserInvestments);
 
   return extrapolatedData.map((coin) => {
     let dateInvested: string = "";
