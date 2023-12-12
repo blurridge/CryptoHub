@@ -76,7 +76,7 @@ Start the server
 
 ## Stay in touch
 
-If you have any questions, suggestions, need further assistance, or would like to avail of Accred for your organization, feel free to reach out to me. I'm always happy to help!
+If you have any questions, suggestions, need further assistance, feel free to reach out to me. I'm always happy to help!
 
 - Email: [zachriane01@gmail.com](mailto:zachriane01@gmail.com)
 - GitHub: [@blurridge](https://github.com/blurridge)

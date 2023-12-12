@@ -113,13 +113,13 @@ export const CoinContextProvider = ({ children }: { children: ReactNode }) => {
                 }
               );
 
-              setTimeout(() => {}, 3000);
-
               const historicalData: CoinValuePerDay[] =
                 response.data.prices.map((priceData: [number, number]) => {
                   const [date, value_in_php] = priceData;
+                  const formattedResponseDate = new Date(date);
+                  formattedResponseDate.setHours(0, 0, 0, 0);
                   return {
-                    date: Timestamp.fromDate(new Date(date)),
+                    date: Timestamp.fromDate(formattedResponseDate),
                     value_in_php,
                   };
                 });
