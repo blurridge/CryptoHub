@@ -40,7 +40,7 @@ export const NewsContextProvider = ({ children }: { children: ReactNode }) => {
       }
     };
 
-    if (news.length === 0) {
+    if (news.length === 0 && loading) {
       updateNews();
     }
   }, [news]);

@@ -48,19 +48,27 @@ export const CardStats = ({ currentInvestment }: CardStatsProps) => {
             <CardTitle className="text-center">Top Asset</CardTitle>
           </CardHeader>
           <CardContent className="text-center flex flex-col gap-2">
-            <div className="flex gap-2 justify-center items-center">
-              <Image
-                src={topAssetImage}
-                alt={`${topAsset} logo`}
-                width={30}
-                height={14}
-                priority
-              />
-              <span className="font-bold text-lg">{topAsset}</span>
-            </div>
-            <span className="font-medium">
-              {topAssetPercent.toFixed(2)}{"% of Portfolio"}
-            </span>
+            {topAsset !== "" ? (
+              <>
+                {" "}
+                <div className="flex gap-2 justify-center items-center">
+                  <Image
+                    src={topAssetImage}
+                    alt={`${topAsset} logo`}
+                    width={30}
+                    height={14}
+                    priority
+                  />
+                  <span className="font-bold text-lg">{topAsset}</span>
+                </div>
+                <span className="font-medium">
+                  {topAssetPercent.toFixed(2)}
+                  {"% of Portfolio"}
+                </span>
+              </>
+            ) : (
+              <span>No assets found.</span>
+            )}
           </CardContent>
         </Card>
       </div>

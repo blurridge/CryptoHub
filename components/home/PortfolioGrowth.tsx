@@ -22,13 +22,14 @@ import { useNews } from "@/context/NewsContext";
 export const PortfolioGrowth = () => {
   const { coinCache, coinList } = useCoins();
   const { user, adminList } = useAuth();
-  const { loading } = useNews();
+  const [loading, setLoading] = useState<boolean>(true);
   const [currentInvestment, setCurrentInvestment] = useState<
     CurrentInvestment[]
   >([]);
 
   useEffect(() => {
     if (coinCache && coinList && user && adminList) {
+      setLoading(true);
       const getCurrentUser = adminList.find(
         (currentUser) => currentUser.email === user?.email
       );
@@ -69,6 +70,7 @@ export const PortfolioGrowth = () => {
         });
         setCurrentInvestment(updatedInvestments);
       }
+      setLoading(false);
     }
   }, [coinCache, coinList, adminList]);
 
@@ -83,7 +85,7 @@ export const PortfolioGrowth = () => {
       ) : (
         <div className="flex flex-col gap-2 h-screen mx-2 my-1">
           <CardStats currentInvestment={currentInvestment} />
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-grow">
             <Card>
               <CardHeader>
                 <CardTitle>Portfolio Growth</CardTitle>
@@ -92,65 +94,69 @@ export const PortfolioGrowth = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-2">
-                {currentInvestment.map((investment) => (
-                  <>
-                    <div className="flex justify-between w-96 rounded-lg bg-gray-100 px-2 py-1">
-                      <div className="flex gap-2">
-                        <Image
-                          src={investment.image_link}
-                          alt={`${investment.coin_id} logo`}
-                          width={44}
-                          height={24}
-                          priority
-                        />
+                {currentInvestment.length === 0 ? (
+                  <span>No investments found. If not now, then when?</span>
+                ) : (
+                  currentInvestment.map((investment) => (
+                    <>
+                      <div className="flex justify-between w-96 rounded-lg bg-gray-100 px-2 py-1">
+                        <div className="flex gap-2">
+                          <Image
+                            src={investment.image_link}
+                            alt={`${investment.coin_id} logo`}
+                            width={44}
+                            height={24}
+                            priority
+                          />
+                          <div className="flex flex-col">
+                            <span className="font-extrabold text-lg">
+                              {investment.name}
+                            </span>
+                            <span className="text-md">
+                              {"PHP"}{" "}
+                              {(
+                                (investment.amount_invested /
+                                  investment.value_at_investment) *
+                                investment.value_now
+                              ).toFixed(2)}
+                            </span>
+                          </div>
+                        </div>
                         <div className="flex flex-col">
-                          <span className="font-extrabold text-lg">
-                            {investment.name}
-                          </span>
+                          {Number.parseFloat(
+                            getPercentIncrease({
+                              pastPrice: investment.value_at_investment,
+                              currentPrice: investment.value_now,
+                            })
+                          ) >= 0.0 ? (
+                            <span className="font-extrabold text-green-500 text-lg">
+                              {"+"}
+                              {getPercentIncrease({
+                                pastPrice: investment.value_at_investment,
+                                currentPrice: investment.value_now,
+                              })}
+                            </span>
+                          ) : (
+                            <span className="font-extrabold text-red-500 text-lg">
+                              {"-"}
+                              {getPercentIncrease({
+                                pastPrice: investment.value_at_investment,
+                                currentPrice: investment.value_now,
+                              })}
+                            </span>
+                          )}
                           <span className="text-md">
-                            {"PHP"}{" "}
+                            {investment.symbol.toUpperCase()}{" "}
                             {(
-                              (investment.amount_invested /
-                                investment.value_at_investment) *
-                              investment.value_now
-                            ).toFixed(2)}
+                              investment.amount_invested /
+                              investment.value_at_investment
+                            ).toFixed(4)}
                           </span>
                         </div>
                       </div>
-                      <div className="flex flex-col">
-                        {Number.parseFloat(
-                          getPercentIncrease({
-                            pastPrice: investment.value_at_investment,
-                            currentPrice: investment.value_now,
-                          })
-                        ) >= 0.0 ? (
-                          <span className="font-extrabold text-green-500 text-lg">
-                            {"+"}
-                            {getPercentIncrease({
-                              pastPrice: investment.value_at_investment,
-                              currentPrice: investment.value_now,
-                            })}
-                          </span>
-                        ) : (
-                          <span className="font-extrabold text-red-500 text-lg">
-                            {"-"}
-                            {getPercentIncrease({
-                              pastPrice: investment.value_at_investment,
-                              currentPrice: investment.value_now,
-                            })}
-                          </span>
-                        )}
-                        <span className="text-md">
-                          {investment.symbol.toUpperCase()}{" "}
-                          {(
-                            investment.amount_invested /
-                            investment.value_at_investment
-                          ).toFixed(4)}
-                        </span>
-                      </div>
-                    </div>
-                  </>
-                ))}
+                    </>
+                  ))
+                )}
               </CardContent>
             </Card>
             <NewsCards />

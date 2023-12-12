@@ -2,12 +2,11 @@
 
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import GoogleButton from "react-google-button";
 
 export const AdminLoginButton = () => {
-  const { googleLogin, user, logOut, checkIfUserIsAdmin } = useAuth();
-  const [validUser, setValidUser] = useState<boolean>(true);
+  const { googleLogin, user } = useAuth();
   const router = useRouter();
 
   const handleGoogleLogin = async () => {
@@ -20,42 +19,19 @@ export const AdminLoginButton = () => {
 
   useEffect(() => {
     if (user !== null) {
-      if (checkIfUserIsAdmin(user)) {
-        setValidUser(true);
-        router.push("/account/home");
-      } else {
-        setValidUser(false);
-        logOut();
-      }
+      router.push("/account/home");
     }
   }, [user]);
-
-  if (validUser) {
-    return (
-      <>
-        <GoogleButton
-          data-te-ripple-init
-          type="light"
-          onClick={() => {
-            handleGoogleLogin();
-          }}
-        />
-      </>
-    );
-  } else {
-    return (
-      <>
-        <GoogleButton
-          data-te-ripple-init
-          type="light"
-          onClick={() => {
-            handleGoogleLogin();
-          }}
-        />
-        <span className="font-title text-red-600">
-          Invalid user. Please try again.
-        </span>
-      </>
-    );
-  }
+  
+  return (
+    <>
+      <GoogleButton
+        data-te-ripple-init
+        type="light"
+        onClick={() => {
+          handleGoogleLogin();
+        }}
+      />
+    </>
+  );
 };

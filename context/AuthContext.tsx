@@ -8,7 +8,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot, query, setDoc, doc } from "firebase/firestore";
 import {
   ReactNode,
   createContext,
@@ -51,6 +51,21 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    const addUserToFirebase = async () => {
+      if (user) {
+        await setDoc(doc(collection(db, "admins"), user.email as string), {
+          email: user.email,
+        });
+      }
+    };
+    if (adminList.length !== 0) {
+      if (user !== null && !checkIfUserIsAdmin(user)) {
+        addUserToFirebase();
+      }
+    }
+  }, [user]);
 
   useEffect(() => {
     const q = query(collection(db, "admins"));
