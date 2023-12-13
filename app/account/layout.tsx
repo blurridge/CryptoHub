@@ -14,7 +14,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(user);
     if (user === null && !loading) {
       router.push("/login");
     }
@@ -28,14 +27,14 @@ const Layout = ({ children }: { children: ReactNode }) => {
         </div>
       ) : (
         <ExtrapolationContextProvider>
-            <div className="flex flex-col h-fit">
-              <Sidebar
-                sidebarContent={SidebarContent}
-                mobileDashboardHeader={MobileHeader}
-              >
-                {children}
-              </Sidebar>
-            </div>
+          <div className="flex flex-col h-fit">
+            <Sidebar
+              sidebarContent={SidebarContent}
+              mobileDashboardHeader={MobileHeader}
+            >
+              {children}
+            </Sidebar>
+          </div>
         </ExtrapolationContextProvider>
       )}
     </>
