@@ -26,9 +26,6 @@ export const NewsContextProvider = ({ children }: { children: ReactNode }) => {
       try {
         let storedNews = localStorage.getItem("newsData");
         let currentDate = localStorage.getItem("currentDate");
-        console.log(currentDate);
-        console.log(storedNews);
-        console.log(formattedTodayDate);
         if (storedNews && currentDate === formattedTodayDate) {
           setNews(JSON.parse(storedNews));
           setLoading(false);

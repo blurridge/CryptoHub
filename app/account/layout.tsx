@@ -14,10 +14,11 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
+    console.log(user);
     if (user === null && !loading) {
       router.push("/login");
     }
-  }, [user]);
+  }, [user, loading]);
 
   return (
     <>
